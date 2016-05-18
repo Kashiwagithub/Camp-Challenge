@@ -5,19 +5,48 @@
  */
 package JSPServlet2;
 
+import static JSPServlet2.kadai7.Profile;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.*;
 
 /**
  *
  * @author Wataru
  */
 public class kadai8 extends HttpServlet {
-
+    
+    public static ArrayList<ArrayList<String>>Profile(){
+        ArrayList<String>array1=
+            new ArrayList<String>();
+        array1.add("名前 Sakurai Go"); //名前
+        array1.add("生年月日 1980年5月5日"); //生年月日
+        array1.add("住所 東京都港区六本木"+"<br>"); //住所
+        
+        ArrayList<String>array2=
+            new ArrayList<String>();
+        array2.add("名前 Tadokoro Koji"); //名前
+        array2.add("生年月日 1980年8月10日"); //生年月日
+        array2.add("住所 東京都世田谷区北沢"+"<br>"); //住所
+        
+        ArrayList<String>array3=
+            new ArrayList<String>();
+        array3.add("名前 Katsuragi"); //名前
+        array3.add("生年月日 1980年10月10日"); //生年月日
+        array3.add("住所 東京都新宿区高田馬場"); //住所
+        
+        ArrayList<ArrayList<String>>arrayunite=
+            new ArrayList<ArrayList<String>>();
+        arrayunite.add(array1); //Index 0
+        arrayunite.add(array2); //Index 1
+        arrayunite.add(array3); //Index 2
+        
+        return arrayunite;
+    }
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -32,16 +61,20 @@ public class kadai8 extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet kadai8</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet kadai8 at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+            
+            ArrayList<ArrayList<String>> unite=Profile();
+        ArrayList<String> box;
+            Integer limit =2;
+            for(int i=0;i<unite.size(); i++){ //arrayuniteの要素番号i
+                if(i>=limit){ //2番目の人で終了させる
+                    break;
+                }
+                box=unite.get(i);
+                for(int j=0;j<box.size(); j++){
+                out.println(box.get(j)+"<br>");
+                }
+            }
+    }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

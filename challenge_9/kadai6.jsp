@@ -16,9 +16,5 @@
             String adress = "foobar@gmail.com";
             out.println(adress.substring(7));
         %>
-        
-        
-        
-        
     </body>
 </html>

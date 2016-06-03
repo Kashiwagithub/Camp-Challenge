@@ -67,7 +67,7 @@
     </head>
     <body>
     <% 
-        if(shin1  && shin2 && shin3 && shin4 && shin5 && shin6 && shin7){ //正論理の場合登録画面に移行 
+        if(shin1  && shin2 && shin3 && shin4 && shin5 && shin6 && shin7){ //論理値がどれか一つでもfalseの場合  
     %>
         <h1>登録確認</h1>
         名前:<%= udb.getName()%><br>
@@ -81,7 +81,7 @@
             <input type="submit" name="yes" value="はい">
         </form>
     <%       
-    }else{ //負論理の場合未入力項目を検知
+    }else{
     if(shin1==false){
                 out.println("名前が入力がされていません<br>");
             }

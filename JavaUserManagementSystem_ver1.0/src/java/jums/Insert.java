@@ -8,12 +8,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * insertconfirm.jspと対応するサーブレット
- * フォーム入力された情報はここでセッションに格納し、以降持ちまわることになる
- * 直接アクセスした場合はerror.jspに振り分け
+ * insert.jspと対応するサーブレット
  * @author hayashi-s
  */
-public class InsertConfirm extends HttpServlet {
+public class Insert extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -26,36 +24,9 @@ public class InsertConfirm extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try{
-            HttpSession session = request.getSession();
-            request.setCharacterEncoding("UTF-8");//セッションに格納する文字コードをUTF-8に変更
-            String accesschk = request.getParameter("ac");
-                if(accesschk ==null || (Integer)session.getAttribute("ac")!=Integer.parseInt(accesschk)){
-                    throw new Exception("不正なアクセスです");
-                }
-            
-            //フォームからの入力を取得
-            String name = request.getParameter("name");
-            String year = request.getParameter("year");
-            String month = request.getParameter("month");
-            String day = request.getParameter("day");
-            String type = request.getParameter("type");
-            String tell = request.getParameter("tell");
-            String comment = request.getParameter("comment");
-            
-            //課題3　フォームから受け取る情報を格納するためのUserDataBeansを利用する
-            UserDataBeans UDB = new UserDataBeans(name,year,month,day,type,tell,comment); //UserDataBeansをインスタンス化
-            
-            //セッションにUDBを格納する
-            
-            session.setAttribute("UDBValue",UDB);
-            
-            request.getRequestDispatcher("/insertconfirm.jsp").forward(request, response);
-        }catch(Exception e){
-            request.setAttribute("error", e.getMessage());
-            request.getRequestDispatcher("/error.jsp").forward(request, response);
-        }
-            
+        HttpSession session = request.getSession();
+        session.setAttribute("ac", (int) (Math.random() * 1000));
+        request.getRequestDispatcher("/insert.jsp").forward(request, response);   
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
